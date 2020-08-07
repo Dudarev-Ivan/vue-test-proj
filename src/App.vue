@@ -1,32 +1,52 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+    <v-app>
+        <v-navigation-drawer
+                app
+                expand-on-hover
+                right
+                >
+            <v-list dense>
+                <v-list-item v-for="item in drawerItems" :to="item.to" :key="item.name">
+                    <v-list-item-content>
+                        <v-list-item-title>{{item.name}}</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
+
+        <v-main>
+            <router-view/>
+        </v-main>
+    </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-}
+    export default {
+        name: 'App',
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+        components: {
+        },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+        data: () => ({
+            drawerItems: [
+                {
+                    name: "Mount",
+                    to: "/mount"
+                },
+                {
+                    name: "Render",
+                    to: "/render"
+                },
+                {
+                    name: "User input",
+                    to: "/user_input"
+                },
+                {
+                    name: "News",
+                    to: "/news"
+                }
+            ]
+        }),
+    };
+</script>
